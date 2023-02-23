@@ -20,11 +20,11 @@ def main():
 
             if servicio_hospitalario.verificarExiste() == False:
                 nombre=input("Ingrese el nombre de la mascota: ")
-                tipo=input("Ingrese el tipo de mascota (felino o canino): ")
+                tipo=input("Ingrese el tipo de mascota (1-felino o 2-canino): ")
                 peso=int(input("Ingrese el peso de la mascota: "))
                 fecha=datetime.datetime.now()
-
                 medicamento=input("Ingrese nombre del medicamento: ")
+                lista_med=[]
                 mas =  Mascota()
                 mas.asignarNombre(nombre)
                 mas.asignarHistoria(historia)
@@ -32,20 +32,21 @@ def main():
                 mas.asignarTipo(tipo)
                 mas.asignarFecha(fecha)
                 mas.asignarMedicamento(medicamento)
-                r = servicio_hospitalario.ingresarMascota()
-                if r :
+
+                if tipo== "felino" :
+                    r = servicio_hospitalario.ingresarFelino(mas)
                     print ("Se ingreso exitosamente la mascota..")
+                elif tipo=="canino":
+                    r =servicio_hospitalario.ingresarCanino(mas)
                 else:
                     print ("No se ingreso la mascota.. ya esta en el sistema")
-
-            else:
-                print("Ya existe una mascota con el numero de historia clínica ingresado.")
+                  
 
         elif menu == 2:
             q = int(input("Ingrese la historia clínica de la mascota: "))
             fecha = servicio_hospitalario.verFechaIngreso(q)
             if fecha != None:  
-                print("La fecha de ingreso de la mascota es: " + fecha.strtime("%x"))
+                print("La fecha de ingreso de la mascota es: " + fecha.strftime("%x"))
             else:
                 print("La historia clínica ingresada no corresponde con ninguna mascota en el sistema.") 
 

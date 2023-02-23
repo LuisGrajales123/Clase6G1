@@ -36,27 +36,37 @@ class Mascota:
 
 class sistemaV:
     def __init__(self):
-        self.__lista_mascotas = []    
-        # self.__lista_mascotas = {}    
+        self.__lista_canino={}
+        self.__lista_felino={}    
 
-    def verificarExiste(self,historia):
-        for m in self.__lista_mascotas:
-            if historia == m.verHistoria():
-                return True
-        #solo luego de haber recorrido todo el ciclo se retorna False
-        return False
+    def verificarIngreso(self,historia):
+        if historia in self.__lista_canino.keys():
+            print("Si se encuentra el canino")
+            return True
+        elif historia in self.__lista_felino.keys():
+            print("Sí se encuentra el felino")
+            return True
+        else:
+            print("Noseencuentra")
+            return False
 
     def verNumeroMascotas(self):
-        return len(self.__lista_mascotas)  
+        return len(self.__lista_felino.keys())+len(self.__lista_canino.keys())
 
-    def ingresarMascota(self,mascota):
-        if self.verificarExiste(mascota.verHistoria()):
+    def ingresarCanino(self,mascota):
+        if self.verificarIngreso(mascota.verHistoria()):
             return False
-        else:
-            self.__lista_mascotas.append(mascota) 
-            # self.__lista_mascotas[mascota.verHistoria()] = mascota
-
+        else: 
+            self.__lista_canino[mascota.verHistoria()] = mascota
             return True
+
+    def ingresarFelino(self,mascota):
+        if self.verificarIngreso(mascota.verHistoria()):
+            return False
+        else: 
+            self.__lista_felino[mascota.verHistoria()] = mascota
+            return True
+
 
     def verFechaIngreso(self,historia):
         #busco la mascota y devuelvo el atributo solicitado
